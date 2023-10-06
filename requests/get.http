@@ -1,0 +1,7 @@
+//GET https://swapi.dev/api/planets/1/
+//GET https://swapi.dev/api/people
+GET https://swapi.dev/api/films/
+//GET https://swapi.dev/api/species/12/
+//GET https://swapi.dev/api/starships/5/
+//GET https://swapi.dev/api/vehicles/4/
+
