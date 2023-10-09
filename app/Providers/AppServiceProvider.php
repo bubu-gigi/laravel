@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repository\BaseRepositoryInterface;
+use App\Repository\Eloquent\BaseRepository;
 use Illuminate\Support\ServiceProvider;
 use App\Repository\Eloquent\FilmRepository;
 use App\Repository\Eloquent\ResidentRepository;
@@ -14,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(FilmRepositoryInterface::class, FilmRepository::class);
         $this->app->bind(ResidentRepositoryInterface::class, ResidentRepository::class);
+        $this->app->bind(BaseRepositoryInterface::class, BaseRepository::class);
     }
 
     /**

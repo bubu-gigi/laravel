@@ -22,9 +22,6 @@ class PopulateResident extends Command
         $response = file_get_contents("https://swapi.dev/api/people");
         $results = json_decode($response)->results;
         foreach ($results as $resident)
-        {
-            print_r($resident);
             $this->residentRepository->insert($resident);
-        }
     }
 }

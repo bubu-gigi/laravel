@@ -3,20 +3,23 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Resident extends Model
 {
-    protected $primaryKey = 'id_resident';
-    public $incrementing = false;
     public $timestamps = false;
-    private string $name = "";
-    private int $height = 0;
-    private int $mass = 0;
-    private string $hairColor = "";
-    private string $skinColor = "";
-    private string $eyeColor = "";
-    private string $birthYear = "";
-    private string $gender = "";
-    private int $idPlanet = 0;
+
+    public function species(): BelongsToMany
+    {
+        return $this->belongsToMany(Specie::class, "resident_specie", "resident_id", "specie_id");
+    }
+    public function starships(): BelongsToMany
+    {
+        return $this->belongsToMany(Starship::class, "resident_starship", "resident_id", "starship_id");
+    }
+    public function vehicles(): BelongsToMany
+    {
+        return $this->belongsToMany(Vehicle::class, "resident_vehicle", "resident_id", "vehicle_id");
+    }
+
 }

@@ -8,14 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Film extends Model
 {
     public $timestamps = false;
-    private int $idFilm = 0;
-    private string $title = "";
-    private string $episodeId = "";
-    private string $openingCrawl = "";
-    private string $director = "";
-    private string $producer = "";
-    private string $releaseDate = "";
-
+    
     public function characters(): BelongsToMany
     {
         return $this->belongsToMany(Resident::class, "film_resident", "film_id", "resident_id");

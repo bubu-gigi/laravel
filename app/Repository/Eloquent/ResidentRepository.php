@@ -3,9 +3,7 @@
 namespace App\Repository\Eloquent;
 
 use App\Models\Resident;
-use Illuminate\Database\Eloquent\Model;
 use App\Repository\ResidentRepositoryInterface;
-use Illuminate\Support\Collection;
 use stdClass;
 
 class ResidentRepository implements ResidentRepositoryInterface
@@ -17,7 +15,7 @@ class ResidentRepository implements ResidentRepositoryInterface
     }
     public function insert(stdClass $attributes): void
     {
-
+        $this->model = new Resident();
         $this->model->name       =  $attributes->name;
         $this->model->height     =  $attributes->height;
         $this->model->mass       =  $attributes->mass;
@@ -29,6 +27,12 @@ class ResidentRepository implements ResidentRepositoryInterface
         $this->model->planet_id  =  $attributes->homeworld;
         $this->model->specie_id  =  $attributes->species;
         $this->model->save();
+        /*if(!($attributes->species == null))
+            foreach($attributes->species as $p)
+                $this->model->starships()->a*/
+        //if(!)
+        //foreach($attributes->species as $spe
+
     }
 
 }
