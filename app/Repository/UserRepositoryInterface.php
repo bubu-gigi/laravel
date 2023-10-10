@@ -12,4 +12,5 @@ interface UserRepositoryInterface
     public function all(): Collection;
     public function find(int $id): User;
     public function delete(int $id): void;
+    public function apiInsert(): void;
 }

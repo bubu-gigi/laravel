@@ -20,8 +20,8 @@ Route::get('/', function () {
 
 Route::get('/users', [UserController::class, 'show']);
 
-Route::get('/users/{id}', [UserController::class, 'get']);
+//Route::get('/users/{id}', [UserController::class, 'get']);
 
-Route::post('/users/insert/{user}', [UserController::class, 'insert']);
+Route::get('/users/create', [UserController::class, 'create']);
 
-Route::delete('/users/delete/{id}', [UserController::class, 'delete']);
+Route::get('/users/delete/{id}', [UserController::class, 'delete']);
