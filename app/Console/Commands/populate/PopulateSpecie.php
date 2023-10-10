@@ -3,26 +3,24 @@
 namespace App\Console\Commands\Populate;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Http;
-use App\Models\Specie;
+use App\Repository\SpecieRepositoryInterface;
 
 class PopulateSpecie extends Command
 {
+    private $specieRepository;
     protected $signature = 'app:populate:specie';
-    protected $description = 'Command description';
+    protected $description = '';
+    public function __construct(SpecieRepositoryInterface $specieRepository)
+    {
+        $this->specieRepository = $specieRepository;
+        parent::__construct();
+    }
+
     public function handle()
     {
-        $i = 1;
-        while(true)
-        {
-            $response = Http::get("https://swapi.dev/api/species/".$i."/");
-            if($response->status() != 200)
-            {
-                echo "La chiamata al api: https://swapi.dev/api/species/".$i."/ non è andata a buon fine.";
-                break;
-            }
-            Specie::insertSpecie($i);
-            $i++;
-        }
+        $response = file_get_contents("https://swapi.dev/api/species");
+        $results = json_decode($response)->results;
+        foreach ($results as $specie)
+            $this->specieRepository->insert($specie);
     }
 }

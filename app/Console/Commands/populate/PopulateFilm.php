@@ -9,7 +9,7 @@ class PopulateFilm extends Command
 {
     private $filmRepository;
     protected $signature = 'app:populate:film';
-    protected $description = 'Command description';
+    protected $description = '';
 
     public function  __construct(FilmRepositoryInterface $filmRepository)
     {
