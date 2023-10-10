@@ -2,6 +2,8 @@
 
 namespace App\Helpers;
 
+use stdClass;
+
 class ApiHelper
 {
     public static function validateApi(string $str): string
