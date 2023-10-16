@@ -19,9 +19,25 @@ class PopulateFilm extends Command
 
     public function handle()
     {
+        $firstTime = true;
         $response = file_get_contents("https://swapi.dev/api/films");
-        $results = json_decode($response)->results;
-        foreach ($results as $film)
-            $this->filmRepository->insert($film);
+        $results = json_decode($response);
+        while(true)
+        {
+            if($firstTime)
+            {
+                foreach ($results->results as $film)
+                    $this->filmRepository->insert($film);
+                $firstTime = false;
+            }
+            if(is_null($results->next))
+                break;
+            else
+            {
+                $results = json_decode(file_get_contents($results->next));
+                foreach ($results->results as $film)
+                    $this->filmRepository->insert($film);
+            }
+        }
     }
 }

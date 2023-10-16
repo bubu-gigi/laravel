@@ -17,9 +17,25 @@ class PopulateStarship extends Command
 
     public function handle()
     {
+        $firstTime = true;
         $response = file_get_contents("https://swapi.dev/api/starships");
-        $results = json_decode($response)->results;
-        foreach ($results as $starship)
-            $this->starshipRepository->insert($starship);
+        $results = json_decode($response);
+        while(true)
+        {
+            if($firstTime)
+            {
+                foreach ($results->results as $starship)
+                    $this->starshipRepository->insert($starship);
+                $firstTime = false;
+            }
+            if(is_null($results->next))
+                break;
+            else
+            {
+                $results = json_decode(file_get_contents($results->next));
+                foreach ($results->results as $starship)
+                    $this->starshipRepository->insert($starship);
+            }
+        }
     }
 }

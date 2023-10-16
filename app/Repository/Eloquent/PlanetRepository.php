@@ -6,6 +6,7 @@ namespace App\Repository\Eloquent;
 use App\Models\Planet;
 use App\Repository\PlanetRepositoryInterface;
 use stdClass;
+use Illuminate\Database\Eloquent\Collection;
 
 class PlanetRepository extends BaseRepository implements PlanetRepositoryInterface
 {
@@ -34,7 +35,19 @@ class PlanetRepository extends BaseRepository implements PlanetRepositoryInterfa
         if(is_numeric($attributes->population))
         $this->model->population = $attributes->population;
         $this->model->save();
-        BaseRepository::insertResidents($attributes->residents, $this->model);
-        $this->model->save();
+    }
+    public function all(): Collection
+    {
+        return $this->model::all();
+    }
+    public function find(int $id): Planet
+    {
+        return $this->model::findOrFail($id);
+    }
+    public function delete(int $id): void
+    {
+        //$this->model->destroy($id);
+        $user = $this->find($id);
+        $user->delete();
     }
 }

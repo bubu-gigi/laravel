@@ -18,9 +18,25 @@ class PopulateSpecie extends Command
 
     public function handle()
     {
+        $firstTime = true;
         $response = file_get_contents("https://swapi.dev/api/species");
-        $results = json_decode($response)->results;
-        foreach ($results as $specie)
-            $this->specieRepository->insert($specie);
+        $results = json_decode($response);
+        while(true)
+        {
+            if($firstTime)
+            {
+                foreach ($results->results as $specie)
+                    $this->specieRepository->insert($specie);
+                $firstTime = false;
+            }
+            if(is_null($results->next))
+                break;
+            else
+            {
+                $results = json_decode(file_get_contents($results->next));
+                foreach ($results->results as $specie)
+                    $this->specieRepository->insert($specie);
+            }
+        }
     }
 }

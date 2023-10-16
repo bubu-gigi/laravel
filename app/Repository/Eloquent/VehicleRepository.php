@@ -22,14 +22,32 @@ class VehicleRepository extends BaseRepository implements VehicleRepositoryInter
         $this->model->manufacturer     =  $attributes->manufacturer;
         if(is_numeric($attributes->cost_in_credits))
             $this->model->cost_in_credits =  $attributes->cost_in_credits;
-        $this->model->length =  $attributes->length;
-        $this->model->max_atmosphering_speed  =  $attributes->max_atmosphering_speed;
-        $this->model->crew  =  $attributes->crew;
-        $this->model->passengers  =  $attributes->passengers;
+        if(is_numeric($attributes->length))
+            $this->model->length =  $attributes->length;
+        if(is_numeric($attributes->max_atmosphering_speed))
+            $this->model->max_atmosphering_speed  =  $attributes->max_atmosphering_speed;
+        if(is_numeric($attributes->crew))
+            $this->model->crew  =  $attributes->crew;
+        if(is_numeric($attributes->passengers))
+            $this->model->passengers  =  $attributes->passengers;
         if(is_numeric($attributes->cargo_capacity))
             $this->model->cargo_capacity  =  $attributes->cargo_capacity;
         $this->model->consumables  =  $attributes->consumables;
         $this->model->vehicle_class  =  $attributes->vehicle_class;
         $this->model->save();
+    }
+    public function all()
+    {
+        return $this->model::all();
+    }
+    public function find(int $id): Vehicle
+    {
+        return $this->model::findOrFail($id);
+    }
+    public function delete(int $id): void
+    {
+        //$this->model->destroy($id);
+        $vehicle = $this->find($id);
+        $vehicle->delete();
     }
 }

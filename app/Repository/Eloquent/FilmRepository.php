@@ -31,4 +31,18 @@ class FilmRepository extends BaseRepository implements FilmRepositoryInterface
         BaseRepository::insertVehicles($attributes->vehicles, $this->model);
         $this->model->save();
     }
+    public function all()
+    {
+        return $this->model::all();
+    }
+    public function find(int $id): Film
+    {
+        return $this->model::findOrFail($id);
+    }
+    public function delete(int $id): void
+    {
+        //$this->model->destroy($id);
+        $film = $this->find($id);
+        $film->delete();
+    }
 }

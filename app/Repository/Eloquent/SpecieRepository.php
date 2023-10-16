@@ -32,4 +32,19 @@ class SpecieRepository extends BaseRepository implements SpecieRepositoryInterfa
         $this->model->language  =  $attributes->language;
         $this->model->save();
     }
+
+    public function all()
+    {
+        return $this->model::all();
+    }
+    public function find(int $id): Specie
+    {
+        return $this->model::findOrFail($id);
+    }
+    public function delete(int $id): void
+    {
+        //$this->model->destroy($id);
+        $specie = $this->find($id);
+        $specie->delete();
+    }
 }

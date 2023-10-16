@@ -9,16 +9,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('film_starship', function (Blueprint $table) {
+        Schema::create('user_specie', function (Blueprint $table) {
             $table->id();
-            $table->integer('film_id');
-            $table->integer('starship_id');
+            $table->integer('user_id');
+            $table->integer('specie_id');
         });
 
-        DB::statement("ALTER TABLE film_starship AUTO_INCREMENT = 1;");
+        DB::statement("ALTER TABLE user_specie AUTO_INCREMENT = 1;");
     }
     public function down(): void
     {
-        Schema::dropIfExists('film_starship');
+        Schema::dropIfExists('user_specie');
     }
 };

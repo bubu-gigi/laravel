@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Film extends Model
 {
     public $timestamps = false;
-    
+
     public function characters(): BelongsToMany
     {
-        return $this->belongsToMany(Resident::class, "film_resident", "film_id", "resident_id");
+        return $this->belongsToMany(User::class, "film_user", "film_id", "user_id");
     }
 
     public function planets(): BelongsToMany
