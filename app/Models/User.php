@@ -2,23 +2,26 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class User extends Model
+class User extends Authenticatable
 {
-    public $timestamps = false;
-
-    public function species(): BelongsToMany
-    {
-        return $this->belongsToMany(Starship::class, "user_specie", "user_id", "specie_id");
-    }
-    public function starships(): BelongsToMany
-    {
-        return $this->belongsToMany(Starship::class, "user_starship", "user_id", "starship_id");
-    }
-    public function vehicles(): BelongsToMany
-    {
-        return $this->belongsToMany(Vehicle::class, "user_vehicle", "user_id", "vehicle_id");
-    }
+    use HasApiTokens, HasFactory, Notifiable;
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+    ];
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
 }
