@@ -24,6 +24,7 @@ return new class extends Migration
             $table->float('hyperdrive_rating')->nullable();
             $table->integer('MGLT')->nullable();
             $table->string('starship_class')->nullable();
+            $table->integer('remote_id');
         });
 
         DB::statement("ALTER TABLE starships AUTO_INCREMENT = 1;");

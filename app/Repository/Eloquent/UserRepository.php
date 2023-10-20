@@ -36,6 +36,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             BaseRepository::insertStarships($attributes->starships, $this->model);
         if(!(is_null($attributes->vehicles)))
             BaseRepository::insertVehicles($attributes->vehicles, $this->model);
+        $this->model->remote_id = ApiHelper::validateApi($attributes->url);
         $this->model->save();
     }
     public function all(): Collection

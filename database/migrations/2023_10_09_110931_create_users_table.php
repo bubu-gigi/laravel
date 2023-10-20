@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('gender')->nullable();;
             $table->integer('planet_id')->nullable();;
             $table->integer('specie_id')->nullable();;
+            $table->integer('remote_id');
         });
 
         DB::statement("ALTER TABLE users AUTO_INCREMENT = 1;");

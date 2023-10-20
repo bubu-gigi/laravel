@@ -30,6 +30,7 @@ class SpecieRepository extends BaseRepository implements SpecieRepositoryInterfa
         if(!(is_null($attributes->homeworld)))
             $this->model->planet_id     =  ApiHelper::validateApi($attributes->homeworld);
         $this->model->language  =  $attributes->language;
+        $this->model->remote_id = ApiHelper::validateApi($attributes->url);
         $this->model->save();
     }
 

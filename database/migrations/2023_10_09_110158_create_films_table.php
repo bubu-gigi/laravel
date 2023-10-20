@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('director')->nullable();
             $table->string('producer')->nullable();
             $table->string('release_date')->nullable();
+            $table->integer('remote_id');
+            $table->integer('tickets')->default(10);
         });
 
         DB::statement("ALTER TABLE films AUTO_INCREMENT = 1;");

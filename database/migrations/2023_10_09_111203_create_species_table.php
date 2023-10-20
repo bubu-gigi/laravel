@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('average_lifespan')->nullable();;
             $table->integer('planet_id')->nullable();;
             $table->string('language')->nullable();;
+            $table->integer('remote_id');
         });
 
         DB::statement("ALTER TABLE species AUTO_INCREMENT = 1;");

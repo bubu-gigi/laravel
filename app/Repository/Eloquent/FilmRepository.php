@@ -2,7 +2,7 @@
 
 namespace App\Repository\Eloquent;
 
-
+use App\Helpers\ApiHelper;
 use App\Models\Film;
 use App\Repository\FilmRepositoryInterface;
 use stdClass;
@@ -29,6 +29,7 @@ class FilmRepository extends BaseRepository implements FilmRepositoryInterface
         BaseRepository::insertStarships($attributes->starships, $this->model);
         BaseRepository::insertSpecies($attributes->species, $this->model);
         BaseRepository::insertVehicles($attributes->vehicles, $this->model);
+        $this->model->remote_id = ApiHelper::validateApi($attributes->url);
         $this->model->save();
     }
     public function all()

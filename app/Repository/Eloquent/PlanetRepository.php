@@ -3,6 +3,7 @@
 namespace App\Repository\Eloquent;
 
 
+use App\Helpers\ApiHelper;
 use App\Models\Planet;
 use App\Repository\PlanetRepositoryInterface;
 use stdClass;
@@ -34,6 +35,7 @@ class PlanetRepository extends BaseRepository implements PlanetRepositoryInterfa
             $this->model->surface_water = $attributes->surface_water;
         if(is_numeric($attributes->population))
         $this->model->population = $attributes->population;
+        $this->model->remote_id = ApiHelper::validateApi($attributes->url);
         $this->model->save();
     }
     public function all(): Collection

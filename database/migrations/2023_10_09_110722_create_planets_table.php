@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('terrain')->nullable();;
             $table->integer('surface_water')->nullable();;
             $table->bigInteger('population')->nullable();;
+            $table->integer('remote_id');
         });
 
         DB::statement("ALTER TABLE planets AUTO_INCREMENT = 1;");

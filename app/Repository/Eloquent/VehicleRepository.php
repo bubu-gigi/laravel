@@ -34,6 +34,7 @@ class VehicleRepository extends BaseRepository implements VehicleRepositoryInter
             $this->model->cargo_capacity  =  $attributes->cargo_capacity;
         $this->model->consumables  =  $attributes->consumables;
         $this->model->vehicle_class  =  $attributes->vehicle_class;
+        $this->model->remote_id = ApiHelper::validateApi($attributes->url);
         $this->model->save();
     }
     public function all()

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->bigInteger('cargo_capacity')->nullable();;
             $table->string('consumables')->nullable();;
             $table->string('vehicle_class')->nullable();;
+            $table->integer('remote_id');
         });
 
         DB::statement("ALTER TABLE vehicles AUTO_INCREMENT = 1;");

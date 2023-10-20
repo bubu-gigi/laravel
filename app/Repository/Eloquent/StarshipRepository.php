@@ -37,6 +37,7 @@ class StarshipRepository extends BaseRepository implements StarshipRepositoryInt
         if(is_numeric($attributes->MGLT))
             $this->model->MGLT       =  $attributes->MGLT;
         $this->model->starship_class       =  $attributes->starship_class;
+        $this->model->remote_id = ApiHelper::validateApi($attributes->url);
         $this->model->save();
     }
     public function all()
